@@ -23,14 +23,24 @@ namespace _002.DefaultParameters
             var routeBuilder = new RouteBuilder(app);
 
             routeBuilder.MapRoute("Test/{action}/{id}",
-                async context => {
+                async context =>
+                {
                     await context.Response.WriteAsync("Test/{action}/{id} template used.");
                 });
 
-            routeBuilder.MapRoute("{controller=Home}/{action}/{id}", 
-                async context => {
+            routeBuilder.MapRoute("{controller=Courses}/{action=GetCourses}/{id?}",
+               async context =>
+               {
+                   await context.Response.WriteAsync("Couses/GetCouses template is used");
+               });
+
+            routeBuilder.MapRoute("{controller=Home}/{action}/{id}",
+                async context =>
+                {
                     await context.Response.WriteAsync("{controller}/{action}/{id} template used.");
                 });
+
+           
 
             app.UseRouter(routeBuilder.Build());
 
